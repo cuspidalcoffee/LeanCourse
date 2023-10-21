@@ -27,7 +27,9 @@ També podem veure una explicació de com estén implementats aquests tipus util
 Aquestes instruccions han de resultar familiars per a aquells que van llegir el llibre morat d'Abelson i Sussman, també conegut com el llibre amb els dos bruixots, el llibre amb la lambda, i molt ocasionalment "L'Estructura i Interpretació de Programes de Computació".
 L'explicació curta (i tècnica) és que Lean (així com Haskell, Lisp i qualsevol altre llenguatge funcional) estan dissenyats com les matemàtiques, tenint un nombre de _construccions fonamentals_ que usem per a implementar altres construccions.
 
-![Vinyeta sobre com tota la infraestructura moderna de Lean està suportada per un tipus que alguna persona a Nebraska ha estat mantenint sense agraïments des del 2003.](XKCD_lean.png) 
+![Vinyeta sobre com tota la infraestructura moderna de Lean està suportada per un tipus que alguna persona a Nebraska ha estat mantenint sense agraïments des del 2003.](XKCD_lean.png)
+
+(Vinyeta original de [XKCD](https://xkcd.com/)).
 
 La sintaxi per a definir una variable és
 
