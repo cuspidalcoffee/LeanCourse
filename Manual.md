@@ -1,22 +1,28 @@
-# Notes de lean
+# Notes de Lean
 
 Aquestes notes van ser redactades amb la intenció de tenir unes notes pel curs donat pel professor Enric Cosme Llópez sobre el llenguatge de demostració automàtica Lean.
-(_Això és més que res una excusa per practicar el meu valencià_).
+(_També és una excusa per practicar el meu valencià_).
 
 Quan estem usant Lean a Visual Studio code, la finestra estarà dividida en dues parts: el codi a l'esquerra i l'intèrpret a la dreta.
 L'intèrpret ens dirà en cada pas quines coses tenim provades i quines coses resten per provar per a finalitzar un teorema.
 També podem usar l'intèrpret per a visualitzar els tipus d'una variable i avaluar funcions (usant una sintaxi tipus notació polonesa com per eixample els llenguatges Lisp).
 
+![Finestra de VSCode amb codi de Lean obert.](lean_window.png)
+
 ## Definicions i sintaxi
+
+### Tipus
 Lean és un llenguatge _tipat fort_ (així com a C o Haskell), el que significa que hem d'assignar un tipus a totes les variables que volem declarar.
 Alguns del tipus que tenim per defecte són:
 * `Nat`: els nombres naturals;
 * `Bool`: per a variables booleans, és a dir que només admeten verdader o fals;
 * `Int`: els nombres enters;
 * `String`: una cadena de caràcters (com a paraules).
+    
+També podem escriure comandes de LaTeX com '\N' i '\Z', que es convertiran en símbols quan pressionem la tecla d'espai.
+Altres símbols que funcionen són `\times`, `\cap`, `\to`...
 
-Podem usar la comanda '#check' amb aquests tipus i Lean ens dirà que hi són...
-Tipus.
+Si usem la comanda '#check' en algú d'aquests tipus, Lean ens dirà que són tipus.
 
 ![Resultat de posar el cursor a la línia `#check Int`.](check_int.png)
 
@@ -31,6 +37,7 @@ L'explicació curta (i tècnica) és que Lean (així com Haskell, Lisp i qualsev
 
 (Vinyeta original de [XKCD](https://xkcd.com/)).
 
+### Variables i espais de treball
 La sintaxi per a definir una variable és
 
 ```
@@ -69,3 +76,23 @@ variable Variable : Tipus := Valor
 
 També podem declarar múltiples variables usant la sintaxi `(var1 var2 : Tipus)`, amb dues `def` i `variable`.
 
+### Aplicacions
+Les aplicacions es declaren com un tipus `Tipus1 \to Tipus2`.
+En aquest cas, la notació esdevé molt natural, perquè si escrivim `f: \Z \to \Z` tenim una funció que toma nombres enters i ens retorna nombres enters!
+Per eixample,
+```
+def f: Nat → Nat := by 
+  intro x
+  exact x + 5
+```
+Aquesta sintaxi és la mateixa que el codi C
+```
+int f(x) { return x + 5; }
+```
+La comanda `intro` és el equivalent de dir "siga `x` un nombre natural", i `exact` és com la comanda `return`.
+Per avaluar, escrivim
+```
+#eval f x               -- f(x)
+#eval f (f x)           -- f(f(x)) (notació polanesa)
+#eval (f\circ f) (x)    -- (f\circ f)(x)
+```
