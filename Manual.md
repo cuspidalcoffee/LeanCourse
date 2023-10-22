@@ -96,3 +96,58 @@ Per avaluar, escrivim
 #eval f (f x)           -- f(f(x)) (notació polanesa)
 #eval (f\circ f) (x)    -- (f\circ f)(x)
 ```
+
+## Treballem amb Proposicions
+Per a declarar una proposició, utilitzem el tipus `Prop`.
+Per eixample, escrivint `variable (P: Prop)` podem declarar una variable global de tipus Prop (una proposició global).
+
+Donades proposicions `P` i `Q`, podem definir noves proposicions usant connectors:
+* Conjunció `\and`
+* Disjunció `\or`
+* Negació `\not`
+* Implicació `\to`
+* Doble implicació `\iff`
+* Veritat `True`
+* Falsetat `False`
+* * No confondre amb `false`, que té tipus `Bool`!
+  
+Per a provar un teorema, fem l'ús de la comanda `theorem` de la manera següent:
+```
+theorem TeoShow (h : P) : P :=
+  show P from h
+```
+Hi ha una altra manera de provar aquest resultat, fent l'ús de comandes tàctiques o _tactics_. El teorema `TeoShow` pot ser provar usant tàctiques mitjançant les instruccions `by` i `exact`:
+```
+theorem TeoShow (h : P) : P := by
+  exact h
+```
+Ara tenim un nou missatge qui llegeixes "no goals".
+Les comandes tàctiques dividien la demostració d'un teorema en _metes_ qui volem aconseguir.
+Per tant, una vegada arribem a l'estat de _no metes_, hem finalitzat la demostració!
+
+![L'estat tàctic ens diu que no tenim més metes que satisfer.](tactics.png)
+
+Quan escrivim un teorema que no està acabar, podem escriure la comanda `sorry` de manera que el compilador no ens cride per tenir un error.
+Si no escrivim `sorry`, Lean ens tornarà el següent missatge:
+
+![Token `theorem` inesperat; s'esperava clau o tàctica.](no_sorry.png)
+
+Podem emprar un teorema ja provar dins la demostració d'un altre teorema:
+```
+theorem Teo4 (h : P) : P := by
+  exact (Teo2 P) h
+```
+Podem dividir una demostració en passos mitjançant la instrucció 'have':
+```
+theorem Teo5 (h : P) : P := by 
+  have h' : P := by exact h 
+  exact h'
+```
+Una altra comanda útil és `example`, qui actúa com un teorema anónim, així que no podem cridar-ho més tard
+```
+example (h : P) : P := by
+  exact h
+```
+
+### Introducció i eliminació
+
